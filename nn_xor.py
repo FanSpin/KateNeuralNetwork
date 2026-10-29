@@ -9,11 +9,20 @@ lr = 0.5          # learning rate
 epochs = 10000    # training iterations
 
 # --- Initialize weights (random, small) ---
-np.random.seed(42)
-W1 = np.random.randn(2, 4)   # 2 inputs → 4 hidden neurons
+
+#np.random.seed(42)  Superseded
+rng = np.random.default_rng(42)
+
+#W1 = np.random.randn(2, 4)   #Superseded
+W1 = rng.standard_normal((2, 4)) # -- 2 inputs → 4 hidden neurons
+
 b1 = np.zeros((1, 4))
-W2 = np.random.randn(4, 1)   # 4 hidden → 1 output
+
+#W2 = np.random.randn(4, 1)   #Superseded
+W2 = rng.standard_normal((4, 1)) #  -- 4 hidden → 1 output
+
 b2 = np.zeros((1, 1))
+
 
 # --- Activation function ---
 def sigmoid(x):
@@ -32,7 +41,7 @@ for i in range(epochs):
     dW2 = a1.T @ dz2
     db2 = np.sum(dz2, axis=0, keepdims=True)
 
-    dz1 = (dz2 @ W2.T) * a1 * (1 - a1)   # hidden error  σ(x) * (1 - σ(x))  — reuses the forward-pass output
+    dz1 = (dz2 @ W2.T) * a1 * (1 - a1)   # hidden error--  σ(x) * (1 - σ(x))  — reuses the forward-pass output
     dW1 = X.T @ dz1
     db1 = np.sum(dz1, axis=0, keepdims=True)
 
