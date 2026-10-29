@@ -32,7 +32,7 @@ for i in range(epochs):
     dW2 = a1.T @ dz2
     db2 = np.sum(dz2, axis=0, keepdims=True)
 
-    dz1 = (dz2 @ W2.T) * a1 * (1 - a1)   # hidden error
+    dz1 = (dz2 @ W2.T) * a1 * (1 - a1)   # hidden error  σ(x) * (1 - σ(x))  — reuses the forward-pass output
     dW1 = X.T @ dz1
     db1 = np.sum(dz1, axis=0, keepdims=True)
 
